@@ -1,0 +1,22 @@
+@import 'variables';
+@import 'globals';
+@import 'header';
+@import 'about';
+@import 'home';
+@import 'form';
+
+#svelte {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+.center {
+	text-align: center;
+}
+.error {
+	color: red;
+	text-transform: capitalize;
+}
+.center.error:not(:first-of-type) {
+	margin-top: 0.1rem;
+}

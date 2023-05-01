@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+
+  backend:
+    build:
+      dockerfile: Dockerfile.backend
+    volumes:
+      - .:/usr/src/app
+    expose:
+      - 8000
+
+  frontend:
+    stdin_open: true
+    build:
+      dockerfile: Dockerfile.frontend
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    expose:
+      - 5173
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+
+  reverse_proxy:
+    build: ./nginx
+    ports:
+      - 81:80
+    depends_on:
+      - backend
+      - frontend
